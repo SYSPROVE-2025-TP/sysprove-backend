@@ -1,4 +1,4 @@
-# 🚀 SYSFUN-BACKEND: API de Gestión de Ventas para Hitss Perú 🚀
+# 🚀 SYSPROVE-BACKEND: API de Gestión de Ventas para Hitss Perú 🚀
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
@@ -14,7 +14,7 @@ Este repositorio contiene el código fuente del **Backend API** del `Sistema de 
 
 ## 📝 **Descripción General**
 
-`SYSFUN-BACKEND` está construido con tecnologías modernas y eficientes para garantizar escalabilidad, rendimiento y facilidad de mantenimiento. Utiliza **Node.js** como entorno de ejecución, **Express.js** para la creación de las APIs REST, y **MongoDB** como base de datos NoSQL para el almacenamiento flexible de datos. La documentación de la API se genera y consume a través de **Swagger**, facilitando la integración con el frontend y otras aplicaciones.
+`SYSPROVE-BACKEND` está construido con tecnologías modernas y eficientes para garantizar escalabilidad, rendimiento y facilidad de mantenimiento. Utiliza **Node.js** como entorno de ejecución, **Express.js** para la creación de las APIs REST, y **MongoDB** como base de datos NoSQL para el almacenamiento flexible de datos. La documentación de la API se genera y consume a través de **Swagger**, facilitando la integración con el frontend y otras aplicaciones.
 
 ### **Características Principales:**
 
