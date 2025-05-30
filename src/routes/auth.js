@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
-const { check, validationResult } = require('express-validator');
+// const { check, validationResult } = require('express-validator');
 const multer = require('multer');
 const upload = multer({ storage: multer.memoryStorage() });
 const authMiddleware = require('../middleware/authMiddleware');
@@ -135,7 +135,7 @@ router.post('/login',
  */
 router.get('/me', authMiddleware, async (req, res) => {
   try {
-    const usuario = await Usuario.findById(req.usuario.id).select('-contrasena');
+    const usuario = await Usuario.findById(req.usuario.id).select('-contrasena').populate('rol');
     if (!usuario) {
       return res.status(404).json({ mensaje: 'Usuario no encontrado' });
     }
