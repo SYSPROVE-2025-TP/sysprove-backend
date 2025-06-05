@@ -8,6 +8,11 @@ const clienteRoutes = require('./routes/cliente');
 const propuestaRoutes = require("./routes/propuestas");
 const contratos= require("./routes/contratos");
 const proyectoRoutes = require("./routes/proyectos");
+///
+//Modulo de Desarrollo
+///
+const proyectoDesarrolloRoutes = require('./routes/proyectoDesarrolloRoutes'); 
+
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const cors = require('cors'); 
@@ -237,5 +242,8 @@ app.use('/clientes', clienteRoutes);
 app.use("/propuestas", propuestaRoutes);
 app.use("/contratos", contratos);
 app.use("/proyectos", proyectoRoutes);
+
+// Rutas del módulo de Desarrollo
+app.use('/api/proyectos-desarrollo', proyectoDesarrolloRoutes);
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Servidor iniciado en el puerto ${PORT}`));
