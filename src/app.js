@@ -12,6 +12,8 @@ const interaccionesRoutes = require('./routes/interacciones');
 const reporteVenta = require('./routes/ReporteVenta'); 
 const repoPropuestaRoutes = require("./routes/repopropuesta"); 
 const conocimientoRoutes = require('./routes/conocimiento');
+const cotizacionesRoutes = require("./routes/cotizaciones");
+const componentesRoutes = require('./routes/componentes'); 
 ///
 //Modulo de Desarrollo
 ///
@@ -250,6 +252,8 @@ app.use('/interacciones', interaccionesRoutes);
 app.use('/reporte-venta', reporteVenta);
 app.use("/repopropuestas", repoPropuestaRoutes);
 app.use('/base-conocimiento', conocimientoRoutes);
+app.use('/cotizaciones', cotizacionesRoutes);
+app.use("/componentes", componentesRoutes);
 // Rutas del módulo de Desarrollo
 app.use('/api/proyectos-desarrollo', proyectoDesarrolloRoutes);
 const PORT = process.env.PORT || 4000;
