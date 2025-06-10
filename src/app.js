@@ -8,6 +8,18 @@ const clienteRoutes = require('./routes/cliente');
 const propuestaRoutes = require("./routes/propuestas");
 const contratos= require("./routes/contratos");
 const proyectoRoutes = require("./routes/proyectos");
+const interaccionesRoutes = require('./routes/interacciones');
+const reporteVenta = require('./routes/ReporteVenta'); 
+const repoPropuestaRoutes = require("./routes/repopropuesta"); 
+const conocimientoRoutes = require('./routes/conocimiento');
+const cotizacionesRoutes = require("./routes/cotizaciones");
+const componentesRoutes = require('./routes/componentes'); 
+const oportunidadRoutes = require("./routes/oportunidades");
+///
+//Modulo de Desarrollo
+///
+const proyectoDesarrolloRoutes = require('./routes/proyectoDesarrolloRoutes'); 
+
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const cors = require('cors'); 
@@ -237,5 +249,14 @@ app.use('/clientes', clienteRoutes);
 app.use("/propuestas", propuestaRoutes);
 app.use("/contratos", contratos);
 app.use("/proyectos", proyectoRoutes);
+app.use('/interacciones', interaccionesRoutes);
+app.use('/reporte-venta', reporteVenta);
+app.use("/repopropuestas", repoPropuestaRoutes);
+app.use('/base-conocimiento', conocimientoRoutes);
+app.use('/cotizaciones', cotizacionesRoutes);
+app.use("/componentes", componentesRoutes);
+app.use('/oportunidades', oportunidadRoutes);
+// Rutas del módulo de Desarrollo
+app.use('/api/proyectos-desarrollo', proyectoDesarrolloRoutes);
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Servidor iniciado en el puerto ${PORT}`));
