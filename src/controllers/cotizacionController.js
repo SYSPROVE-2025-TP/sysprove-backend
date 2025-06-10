@@ -1,7 +1,7 @@
 const Propuesta = require("../models/Propuesta");
 const Cotizacion = require("../models/Cotizacion");
-const Cliente = require('../models/Cliente');
-const { generarPDF } = require("../services/pdfService");
+// const Cliente = require('../models/Cliente');
+// const { generarPDF } = require("../services/pdfService");
 const { enviarEmail } = require("../services/emailService");
 
 // Ver propuesta aprobada
@@ -37,74 +37,72 @@ exports.verPropuesta = async (req, res) => {
 
 // Crear cotización
 exports.crearCotizacion = async (req, res) => {
+  // Los campos de texto siguen en req.body
+  const { cliente, propuesta, estado, fechaEnvio, destinatarios } = req.body;
+  // Los archivos están ahora en req.files
+  const archivos = req.files;
+
   try {
-    if (!req.body.propuestaId) {
-      return res.status(400).json({ 
-        success: false, 
-        message: "El ID de propuesta es requerido" 
-      });
-    }
-
-    const propuesta = await Propuesta.findById(req.body.propuestaId).populate("cliente").exec();
-
-    if (!propuesta) {
-      return res.status(404).json({ 
-        success: false, 
-        message: "Propuesta no encontrada" 
-      });
-    }
-
-    if (propuesta.estado !== "Aprobada") {
-      return res.status(400).json({ 
-        success: false, 
-        message: "Solo se puede crear cotización de propuestas aprobadas",
-        estadoActual: propuesta.estado
-      });
-    }
-
-    // Generar PDF
-    let pdfData;
-    try {
-      pdfData = await generarPDF(propuesta);
-    } catch (pdfError) {
-      console.error("Error al generar PDF:", pdfError);
-      return res.status(500).json({ success: false, message: "Error al generar el documento PDF" });
-    }
-
-    // Crear cotización
     const nuevaCotizacion = new Cotizacion({
-      propuesta: propuesta._id,
-      cliente: propuesta.cliente._id,
-      pdf: {
-        nombreArchivo: `Cotización_${propuesta._id}_${Date.now()}.pdf`,
-        contenido: pdfData,
-        tipoContenido: "application/pdf"
-      },
-      estado: "Borrador",
-      creadoPor: req.user._id
+      cliente,
+      propuesta,
+      estado,
+      fechaEnvio,
+      destinatarios: destinatarios ? JSON.parse(destinatarios) : [],
     });
+
+    // --- LÓGICA PARA MANEJAR EL ARCHIVO PDF ---
+    // Si se subió al menos un archivo, tomamos el primero
+    if (archivos && archivos.length > 0) {
+      const pdfFile = archivos[0];
+      nuevaCotizacion.pdf = {
+        nombreArchivo: pdfFile.originalname,
+        contenido: pdfFile.buffer, // El contenido del archivo en buffer
+        tipoContenido: pdfFile.mimetype, // ej: 'application/pdf'
+      };
+    }
 
     await nuevaCotizacion.save();
-    
-    res.status(201).json({ 
+
+    res.status(201).json({
       success: true,
-      message: "Cotización creada correctamente",
-      data: {
-        id: nuevaCotizacion._id,
-        estado: nuevaCotizacion.estado,
-        nombreArchivo: nuevaCotizacion.pdf.nombreArchivo
-      }
+      message: "Cotización creada y PDF adjuntado correctamente",
+      data: nuevaCotizacion,
     });
+
   } catch (error) {
-    console.error("Error en crearCotizacion:", error);
-    res.status(500).json({ 
-      success: false, 
-      message: "Error al crear cotización",
-      error: error.message 
+    console.error("Error al crear cotización:", error);
+    if (error.name === 'ValidationError') {
+      const mensajes = Object.values(error.errors).map(val => val.message);
+      return res.status(400).json({
+        success: false,
+        message: "Error de validación.",
+        errors: mensajes,
+      });
+    }
+    res.status(500).json({
+      success: false,
+      message: "Error interno del servidor al crear la cotización.",
     });
   }
 };
+exports.obtenerCotizaciones = async (req, res) => { // <-- ¡Asegúrate que 'exports.' esté aquí!
+  try {
+    const cotizaciones = await Cotizacion.find()
+      .populate("cliente", "nombre")
+      .populate("propuesta", "descripcion")
+      .sort({ fechaCreacion: -1 });
 
+    res.status(200).json(cotizaciones);
+  } catch (error) {
+    console.error("Error en obtenerCotizaciones:", error);
+    res.status(500).json({
+      success: false,
+      message: "Error al obtener las cotizaciones",
+      error: error.message,
+    });
+  }
+};
 // Enviar cotización
 exports.enviarCotizacion = async (req, res) => {
   try {

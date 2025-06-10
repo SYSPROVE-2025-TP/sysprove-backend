@@ -1,5 +1,5 @@
 const Propuesta = require("../models/Propuesta");
-const Cliente = require("../models/Cliente");
+// const Cliente = require("../models/Cliente");
 
 // Crear una nueva propuesta
 exports.crearPropuesta = async (req, res) => {
@@ -72,5 +72,16 @@ exports.eliminarPropuesta = async (req, res) => {
   } catch (error) {
     console.error("Error al eliminar la propuesta:", error);
     res.status(500).json({ mensaje: "Error al eliminar la propuesta" });
+  }
+};
+exports.obtenerPropuestasAprobadas = async (req, res) => {
+  try {
+    const propuestas = await Propuesta.find({ estado: "Aprobada" }) // Filtro por estado
+      .populate("cliente", "nombre")
+      .exec();
+    res.status(200).json(propuestas);
+  } catch (error) {
+    console.error("Error al obtener propuestas aprobadas:", error);
+    res.status(500).json({ mensaje: "Error al obtener propuestas aprobadas" });
   }
 };

@@ -1,15 +1,15 @@
-// models/Cotizacion.js
+// EN: models/Cotizacion.js
 const mongoose = require("mongoose");
 
 const CotizacionSchema = new mongoose.Schema({
   propuesta: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "propuestas",
+    ref: "Propuesta", // CORREGIDO de "propuestas" a "Propuesta"
     required: true
   },
   cliente: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "clientes",
+    ref: "Cliente",   // CORREGIDO de "clientes" a "Cliente"
     required: true
   },
   pdf: {
