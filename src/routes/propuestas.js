@@ -123,5 +123,7 @@ router.put("/:id", propuestaController.actualizarPropuesta);
  *         description: Error al eliminar la propuesta
  */
 router.delete("/:id", propuestaController.eliminarPropuesta);
+router.get("/aprobadas", propuestaController.obtenerPropuestasAprobadas);
+
 
 module.exports = router;
