@@ -15,6 +15,18 @@ const conocimientoRoutes = require('./routes/conocimiento');
 const cotizacionesRoutes = require("./routes/cotizaciones");
 const componentesRoutes = require('./routes/componentes'); 
 const oportunidadRoutes = require("./routes/oportunidades");
+const casoDePruebaRoutes = require('./routes/casoDePruebaRoutes'); // Importa las rutas de los casos de prueba
+const express = require('express');
+const conectarDB = require('./config/database');
+const tareaRoutes = require('./routes/tareaRoutes'); // Importa las rutas de tareas
+
+app.use(express.json());
+app.use('/api/tareas', tareaRoutes);  // Usa las rutas para tareas
+
+
+// Configura las rutas en el servidor
+app.use('/api/casos', casoDePruebaRoutes);
+
 ///
 //Modulo de Desarrollo
 ///
