@@ -390,7 +390,13 @@ router.post('/solicitar-restablecimiento', authController.solicitarRestablecimie
  */
 router.post('/restablecer-contrasena/:token', authController.restablecerContrasena);
 
-module.exports = router;
 
 
+router.put(
+  '/mi-perfil',
+  authMiddleware,
+  upload.single('foto_de_colaborador'),
+  authController.actualizarPerfilPropio
+);
 module.exports = router;
+

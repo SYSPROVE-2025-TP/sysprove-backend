@@ -22,7 +22,7 @@ const feedbackVentasRoutes = require('./routes/feedbackVentas');
 //Modulo de Desarrollo
 ///
 const proyectoDesarrolloRoutes = require('./routes/proyectoDesarrolloRoutes'); 
-
+const casosPruebaRoutes = require('./routes/casosPrueba.routes');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const cors = require('cors'); 
@@ -231,9 +231,9 @@ const swaggerOptions = {
         },
       }
     },
-    security: [{ 
-      bearerAuth: []
-    }]
+    // security: [{ 
+    //   bearerAuth: []
+    // }]
   },
   apis: ['./src/routes/*.js'], 
 };
@@ -263,5 +263,14 @@ app.use('/oportunidades', oportunidadRoutes);
 app.use('/api/proyectos-desarrollo', proyectoDesarrolloRoutes);
 // Rutas de Feedback desde Desarrollo
 app.use('/api/repositorio-ventas', feedbackVentasRoutes);
+
+
+app.use('/api/casos-prueba', casosPruebaRoutes);
+
+
+
+
+
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Servidor iniciado en el puerto ${PORT}`));
