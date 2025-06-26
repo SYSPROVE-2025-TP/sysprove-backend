@@ -31,7 +31,7 @@ router.post(
 // @access  Private
 router.get(
   '/',
-  authMiddleware,
+  // authMiddleware,
   proyectoDesarrolloController.obtenerProyectosDesarrollo
 );
 

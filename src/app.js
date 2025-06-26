@@ -15,6 +15,9 @@ const conocimientoRoutes = require('./routes/conocimiento');
 const cotizacionesRoutes = require("./routes/cotizaciones");
 const componentesRoutes = require('./routes/componentes'); 
 const oportunidadRoutes = require("./routes/oportunidades");
+
+// Rutas de Feedback desde Desarrollo
+const feedbackVentasRoutes = require('./routes/feedbackVentas');
 ///
 //Modulo de Desarrollo
 ///
@@ -258,5 +261,7 @@ app.use("/componentes", componentesRoutes);
 app.use('/oportunidades', oportunidadRoutes);
 // Rutas del módulo de Desarrollo
 app.use('/api/proyectos-desarrollo', proyectoDesarrolloRoutes);
+// Rutas de Feedback desde Desarrollo
+app.use('/api/repositorio-ventas', feedbackVentasRoutes);
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Servidor iniciado en el puerto ${PORT}`));
