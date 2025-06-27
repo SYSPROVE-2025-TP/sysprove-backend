@@ -15,7 +15,7 @@ const conocimientoRoutes = require('./routes/conocimiento');
 const cotizacionesRoutes = require("./routes/cotizaciones");
 const componentesRoutes = require('./routes/componentes'); 
 const oportunidadRoutes = require("./routes/oportunidades");
-
+const defectoRoutes = require('./routes/defectoRoutes');
 // Rutas de Feedback desde Desarrollo
 const feedbackVentasRoutes = require('./routes/feedbackVentas');
 ///
@@ -268,7 +268,7 @@ app.use('/api/repositorio-ventas', feedbackVentasRoutes);
 app.use('/api/casos-prueba', casosPruebaRoutes);
 
 
-
+app.use('/api/errores', defectoRoutes);
 
 
 
