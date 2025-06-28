@@ -18,6 +18,7 @@ const oportunidadRoutes = require("./routes/oportunidades");
 const defectoRoutes = require('./routes/defectoRoutes');
 // Rutas de Feedback desde Desarrollo
 const feedbackVentasRoutes = require('./routes/feedbackVentas');
+const contactoRoutes = require('./routes/contacto.routes');
 ///
 //Modulo de Desarrollo
 ///
@@ -247,6 +248,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Rutas de la API
 app.use('/auth', authRoutes);
 app.use('/areas', areaRoutes);
+app.use('/api', contactoRoutes);
 app.use('/roles', rolRoutes);
 app.use('/clientes', clienteRoutes); 
 app.use("/propuestas", propuestaRoutes);
