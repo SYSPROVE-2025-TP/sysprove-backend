@@ -19,6 +19,7 @@ const defectoRoutes = require('./routes/defectoRoutes');
 // Rutas de Feedback desde Desarrollo
 const feedbackVentasRoutes = require('./routes/feedbackVentas');
 const contactoRoutes = require('./routes/contacto.routes');
+const escalamientoRoutes = require('./routes/escalamiento.routes');
 ///
 //Modulo de Desarrollo
 ///
@@ -275,7 +276,7 @@ app.use('/api/casos-prueba', casosPruebaRoutes);
 app.use('/api/incidencias', incidenciasRoutes);
 
 app.use('/api/errores', defectoRoutes);
-
+app.use('/api/escalamientos', escalamientoRoutes);
 
 
 const PORT = process.env.PORT || 4000;
