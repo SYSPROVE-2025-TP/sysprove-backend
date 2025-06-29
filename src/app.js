@@ -24,7 +24,7 @@ const escalamientoRoutes = require('./routes/escalamiento.routes');
 
 const sprintRoutes = require('./routes/sprint.routes');
 const backlogItemRoutes = require('./routes/backlogItem.routes');
-
+const reporteDesarrolloRoutes = require('./routes/reporteDesarrolloRoutes');//
 ///
 //Modulo de Desarrollo
 ///
@@ -285,5 +285,7 @@ app.use('/api/escalamientos', escalamientoRoutes);
 app.use('/feedback', feedbackRoutes);
 app.use('/api/sprints', sprintRoutes);
 app.use('/api/backlog-items', backlogItemRoutes);
+app.use('/reportesdesarrollo', reporteDesarrolloRoutes);//
+app.use("/tareas", require("./routes/tareas"));
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Servidor iniciado en el puerto ${PORT}`));
