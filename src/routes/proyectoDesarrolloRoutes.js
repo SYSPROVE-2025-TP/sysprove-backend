@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const proyectoDesarrolloController = require('../controllers/proyectoDesarrolloController');
-const authMiddleware = require('../middleware/authMiddleware'); // Middleware de autenticación que ya tienes
+// const authMiddleware = require('../middleware/authMiddleware'); // Middleware de autenticación que ya tienes
 // const { check } = require('express-validator'); // Si decides usar express-validator
 const backlogItemController = require('../controllers/backlogItemController');
 const sprintController = require('../controllers/sprintController');
