@@ -15,11 +15,24 @@ const conocimientoRoutes = require('./routes/conocimiento');
 const cotizacionesRoutes = require("./routes/cotizaciones");
 const componentesRoutes = require('./routes/componentes'); 
 const oportunidadRoutes = require("./routes/oportunidades");
+const defectoRoutes = require('./routes/defectoRoutes');
+// Rutas de Feedback desde Desarrollo
+const feedbackVentasRoutes = require('./routes/feedbackVentas');
+const contactoRoutes = require('./routes/contacto.routes');
+const escalamientoRoutes = require('./routes/escalamiento.routes');
+
+
+const sprintRoutes = require('./routes/sprint.routes');
+const backlogItemRoutes = require('./routes/backlogItem.routes');
+const reporteDesarrolloRoutes = require('./routes/reporteDesarrolloRoutes');//
 ///
 //Modulo de Desarrollo
 ///
 const proyectoDesarrolloRoutes = require('./routes/proyectoDesarrolloRoutes'); 
-
+const feedbackRoutes = require('./routes/feedback');
+//Modulo de soporte
+const incidenciasRoutes = require('./routes/incidencias');
+const casosPruebaRoutes = require('./routes/casosPrueba.routes');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const cors = require('cors'); 
@@ -228,9 +241,9 @@ const swaggerOptions = {
         },
       }
     },
-    security: [{ 
-      bearerAuth: []
-    }]
+    // security: [{ 
+    //   bearerAuth: []
+    // }]
   },
   apis: ['./src/routes/*.js'], 
 };
@@ -244,6 +257,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Rutas de la API
 app.use('/auth', authRoutes);
 app.use('/areas', areaRoutes);
+app.use('/api', contactoRoutes);
 app.use('/roles', rolRoutes);
 app.use('/clientes', clienteRoutes); 
 app.use("/propuestas", propuestaRoutes);
@@ -258,5 +272,20 @@ app.use("/componentes", componentesRoutes);
 app.use('/oportunidades', oportunidadRoutes);
 // Rutas del módulo de Desarrollo
 app.use('/api/proyectos-desarrollo', proyectoDesarrolloRoutes);
+// Rutas de Feedback desde Desarrollo
+app.use('/api/repositorio-ventas', feedbackVentasRoutes);
+
+
+app.use('/api/casos-prueba', casosPruebaRoutes);
+
+app.use('/api/incidencias', incidenciasRoutes);
+
+app.use('/api/errores', defectoRoutes);
+app.use('/api/escalamientos', escalamientoRoutes);
+app.use('/feedback', feedbackRoutes);
+app.use('/api/sprints', sprintRoutes);
+app.use('/api/backlog-items', backlogItemRoutes);
+app.use('/reportesdesarrollo', reporteDesarrolloRoutes);//
+app.use("/tareas", require("./routes/tareas"));
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Servidor iniciado en el puerto ${PORT}`));
