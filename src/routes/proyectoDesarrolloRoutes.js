@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const proyectoDesarrolloController = require('../controllers/proyectoDesarrolloController');
-const authMiddleware = require('../middleware/authMiddleware'); // Middleware de autenticación que ya tienes
+// const authMiddleware = require('../middleware/authMiddleware'); // Middleware de autenticación que ya tienes
 // const { check } = require('express-validator'); // Si decides usar express-validator
 const backlogItemController = require('../controllers/backlogItemController');
 const sprintController = require('../controllers/sprintController');
@@ -15,7 +15,7 @@ const sprintController = require('../controllers/sprintController');
 // @access  Private (ej. Administrador, Líder de Proyecto)
 router.post(
   '/',
-  authMiddleware, // Aplicar autenticación
+  // authMiddleware, // Aplicar autenticación
   // Aquí irían las validaciones de express-validator si las usas:
   // [
   //   check('nombre', 'El nombre del proyecto es obligatorio').not().isEmpty(),
@@ -31,7 +31,7 @@ router.post(
 // @access  Private
 router.get(
   '/',
-  authMiddleware,
+  // authMiddleware,
   proyectoDesarrolloController.obtenerProyectosDesarrollo
 );
 
@@ -40,7 +40,7 @@ router.get(
 // @access  Private
 router.get(
   '/:id',
-  authMiddleware,
+  // authMiddleware,
   proyectoDesarrolloController.obtenerProyectoDesarrolloPorId
 );
 
@@ -49,7 +49,7 @@ router.get(
 // @access  Private (ej. Líder de Proyecto asignado, Administrador)
 router.put(
   '/:id',
-  authMiddleware,
+  // authMiddleware,
   // Aquí también podrías añadir validaciones para los campos actualizables
   proyectoDesarrolloController.actualizarProyectoDesarrollo
 );
@@ -59,7 +59,7 @@ router.put(
 // @access  Private (ej. Administrador)
 router.delete(
   '/:id',
-  authMiddleware,
+  // authMiddleware,
   proyectoDesarrolloController.eliminarProyectoDesarrollo
 );
 
@@ -68,7 +68,7 @@ router.delete(
 // @access  Private (ej. Líder de Proyecto asignado, Administrador)
 router.put(
   '/:id/equipo',
-  authMiddleware,
+  // authMiddleware,
   // Validaciones para los IDs de usuario del equipo
   proyectoDesarrolloController.gestionarEquipoProyectoDesarrollo
 );
@@ -79,14 +79,15 @@ router.put(
 // router.get('/:proyectoId/sprints', authMiddleware, sprintController.obtenerSprintsPorProyecto);
 
 
-
+router.get('/items', backlogItemController.obtenerTodosLosItemsBacklog);
+router.get('/sprints', sprintController.obtenerTodosLosSprints);
 // --- RUTAS PARA BACKLOG ITEMS ---
 
 // Crear un nuevo Backlog Item para un proyecto
 // POST /api/proyectos-desarrollo/:proyectoId/backlog-items
 router.post(
   '/:proyectoId/backlog-items',
-  authMiddleware,
+  // authMiddleware,
   backlogItemController.crearBacklogItem
 );
 
@@ -94,7 +95,7 @@ router.post(
 // GET /api/proyectos-desarrollo/:proyectoId/backlog-items
 router.get(
   '/:proyectoId/backlog-items',
-  authMiddleware,
+  // authMiddleware,
   backlogItemController.obtenerBacklogItemsPorProyecto
 );
 
@@ -104,21 +105,21 @@ router.get(
 // GET /api/backlog-items/:itemId
 router.get(
   '/items/:itemId', // Usamos un prefijo para evitar conflictos con /:id de proyectos
-  authMiddleware,
+  // authMiddleware,
   backlogItemController.obtenerBacklogItemPorId
 );
 
 // PUT /api/backlog-items/:itemId
 router.put(
   '/items/:itemId',
-  authMiddleware,
+  // authMiddleware,
   backlogItemController.actualizarBacklogItem
 );
 
 // DELETE /api/backlog-items/:itemId
 router.delete(
   '/items/:itemId',
-  authMiddleware,
+  // authMiddleware,
   backlogItemController.eliminarBacklogItem
 );
 
@@ -129,7 +130,7 @@ router.delete(
 // POST /api/proyectos-desarrollo/:proyectoId/sprints
 router.post(
   '/:proyectoId/sprints',
-  authMiddleware,
+  // authMiddleware,
   sprintController.crearSprint
 );
 
@@ -137,7 +138,7 @@ router.post(
 // GET /api/proyectos-desarrollo/:proyectoId/sprints
 router.get(
   '/:proyectoId/sprints',
-  authMiddleware,
+  // authMiddleware,
   sprintController.obtenerSprintsPorProyecto
 );
 
@@ -147,21 +148,21 @@ router.get(
 // GET /api/sprints/:sprintId
 router.get(
     '/sprints/:sprintId', // Usando un prefijo diferente
-    authMiddleware,
+    // authMiddleware,
     sprintController.obtenerSprintPorId
 );
 
 // PUT /api/sprints/:sprintId
 router.put(
     '/sprints/:sprintId',
-    authMiddleware,
+    // authMiddleware,
     sprintController.actualizarSprint
 );
 
 // DELETE /api/sprints/:sprintId
 router.delete(
     '/sprints/:sprintId',
-    authMiddleware,
+    // authMiddleware,
     sprintController.eliminarSprint
 );
 

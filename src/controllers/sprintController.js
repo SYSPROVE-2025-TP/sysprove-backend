@@ -146,3 +146,12 @@ exports.eliminarSprint = async (req, res) => {
     res.status(500).json({ mensaje: 'Error del servidor.' });
   }
 };
+exports.obtenerTodosLosSprints = async (req, res) => {
+  try {
+    const sprints = await Sprint.find();
+    res.json(sprints);
+  } catch (error) {
+    console.error('Error al obtener sprints:', error);
+    res.status(500).json({ mensaje: 'Error del servidor' });
+  }
+};

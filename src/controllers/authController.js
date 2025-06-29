@@ -224,3 +224,49 @@ exports.restablecerContrasena = async (req, res) => {
     res.status(500).json({ mensaje: 'Error al restablecer la contraseña' });
   }
 };
+exports.actualizarPerfilPropio = async (req, res) => {
+  try {
+    const usuario = await Usuario.findById(req.usuario.id);
+    if (!usuario) {
+      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+    }
+
+    const {
+      nombres,
+      apellidos,
+      nombre_usuario,
+      fecha_de_nacimiento,
+      tipoDocumento,
+      numeroDocumento
+    } = req.body;
+
+    // Actualizar campos permitidos
+    usuario.nombres = nombres || usuario.nombres;
+    usuario.apellidos = apellidos || usuario.apellidos;
+    usuario.nombre_usuario = nombre_usuario || usuario.nombre_usuario;
+    usuario.fecha_de_nacimiento = fecha_de_nacimiento || usuario.fecha_de_nacimiento;
+    usuario.tipoDocumento = tipoDocumento || usuario.tipoDocumento;
+    usuario.numeroDocumento = numeroDocumento || usuario.numeroDocumento;
+
+    // Si se carga una nueva imagen
+    if (req.file) {
+      const nuevoArchivo = new Archivo({
+        filename: req.file.originalname,
+        contentType: req.file.mimetype,
+        length: req.file.size,
+        chunkSize: req.file.chunkSize,
+        uploadDate: new Date(),
+        md5: req.file.md5,
+        data: req.file.buffer,
+      });
+      await nuevoArchivo.save();
+      usuario.foto_de_colaborador = nuevoArchivo._id;
+    }
+
+    await usuario.save();
+    res.json({ mensaje: 'Perfil actualizado correctamente' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: 'Error al actualizar el perfil' });
+  }
+};
