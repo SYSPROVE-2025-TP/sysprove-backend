@@ -32,7 +32,7 @@ const proyectoDesarrolloSchema = new mongoose.Schema({
   // --- INFORMACIÓN ESPECÍFICA DE DESARROLLO ---
   estadoDesarrollo: {
     type: String,
-    enum: ['Planificación', 'En Curso', 'En Pruebas (QA)', 'Pausado', 'Completado', 'Cancelado'],
+    enum: ['Iniciado', 'Análisis', 'Diseño', 'Desarrollo', 'QA','Implementación','Completado', 'Cancelado'],
     default: 'Planificación',
     required: true,
   },
