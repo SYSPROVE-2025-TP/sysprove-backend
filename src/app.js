@@ -23,6 +23,9 @@ const contactoRoutes = require('./routes/contacto.routes');
 //Modulo de Desarrollo
 ///
 const proyectoDesarrolloRoutes = require('./routes/proyectoDesarrolloRoutes'); 
+
+//Modulo de soporte
+const incidenciasRoutes = require('./routes/incidencias');
 const casosPruebaRoutes = require('./routes/casosPrueba.routes');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
@@ -269,6 +272,7 @@ app.use('/api/repositorio-ventas', feedbackVentasRoutes);
 
 app.use('/api/casos-prueba', casosPruebaRoutes);
 
+app.use('/api/incidencias', incidenciasRoutes);
 
 app.use('/api/errores', defectoRoutes);
 
