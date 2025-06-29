@@ -24,7 +24,7 @@ const escalamientoRoutes = require('./routes/escalamiento.routes');
 //Modulo de Desarrollo
 ///
 const proyectoDesarrolloRoutes = require('./routes/proyectoDesarrolloRoutes'); 
-
+const feedbackRoutes = require('./routes/feedback');
 //Modulo de soporte
 const incidenciasRoutes = require('./routes/incidencias');
 const casosPruebaRoutes = require('./routes/casosPrueba.routes');
@@ -277,7 +277,7 @@ app.use('/api/incidencias', incidenciasRoutes);
 
 app.use('/api/errores', defectoRoutes);
 app.use('/api/escalamientos', escalamientoRoutes);
-
+app.use('/feedback', feedbackRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Servidor iniciado en el puerto ${PORT}`));
