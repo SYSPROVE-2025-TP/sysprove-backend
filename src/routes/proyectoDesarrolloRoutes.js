@@ -79,7 +79,8 @@ router.put(
 // router.get('/:proyectoId/sprints', authMiddleware, sprintController.obtenerSprintsPorProyecto);
 
 
-
+router.get('/items', backlogItemController.obtenerTodosLosItemsBacklog);
+router.get('/sprints', sprintController.obtenerTodosLosSprints);
 // --- RUTAS PARA BACKLOG ITEMS ---
 
 // Crear un nuevo Backlog Item para un proyecto

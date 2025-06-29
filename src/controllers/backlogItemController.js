@@ -159,3 +159,12 @@ exports.eliminarBacklogItem = async (req, res) => {
     res.status(500).json({ mensaje: 'Error del servidor.' });
   }
 };
+exports.obtenerTodosLosItemsBacklog = async (req, res) => {
+  try {
+    const items = await BacklogItem.find().populate('proyectoDesarrollo');
+    res.json(items);
+  } catch (error) {
+    console.error('Error al obtener backlogs:', error);
+    res.status(500).json({ mensaje: 'Error del servidor' });
+  }
+};
