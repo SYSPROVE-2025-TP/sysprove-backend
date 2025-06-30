@@ -33,7 +33,7 @@ const proyectoDesarrolloSchema = new mongoose.Schema({
   estadoDesarrollo: {
     type: String,
     enum: ['Iniciado', 'Análisis', 'Diseño', 'Desarrollo', 'QA','Implementación','Completado', 'Cancelado'],
-    default: 'Planificación',
+    default: 'Iniciado',
     required: true,
   },
   fechaInicioEstimada: {
